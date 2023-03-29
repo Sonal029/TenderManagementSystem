@@ -1,7 +1,7 @@
 package Tender.UI;
 
+import java.sql.SQLException;
 import java.util.Scanner;
-
 import Tender.DAO.VendorDAO;
 import Tender.DAO.VendorDAOImpl;
 import Tender.DTO.vendor;
@@ -45,7 +45,7 @@ public class VendorUI
         }
     }
 
-	public static void vendorRegistration(Scanner sc) {
+	public static void vendorRegistration(Scanner sc) throws SQLException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter id");
 		String id = sc.next();
@@ -57,8 +57,13 @@ public class VendorUI
 		String password = sc.next();
 		
 	    vendor v = new vendorImpl(id,name,username,password);
-	    
+	     
+	    VendorDAO vdao= new VendorDAOImpl();
+	    vdao.vendorRegistration(v);
+	    System.out.println("Vendor registered sucessfully");
 		
+	    vendorAuthentication(sc);
+	    
 	}
 
 	public static void vendorAuthentication(Scanner sc) {
