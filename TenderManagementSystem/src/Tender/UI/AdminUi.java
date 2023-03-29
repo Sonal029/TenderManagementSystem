@@ -1,10 +1,19 @@
 package Tender.UI;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
+
+
+
+import Tender.DAO.AdminDAO;
+import Tender.DAO.AdminDAOImpl;
+import Tender.DTO.vendor;
+import Tender.Exception.SomethingWentWrongException;
 
 public class AdminUi {
 
-	public static void displayMenuOfAdmin(Scanner sc) 
+	public static void displayMenuOfAdmin(Scanner sc) throws SomethingWentWrongException 
 	{
 		System.out.println("1. View all the vendors.");
 		System.out.println("2. Create new tenders.");
@@ -17,7 +26,7 @@ public class AdminUi {
 		int adminAction =sc.nextInt();
 		 if (adminAction == 1) {
              // View all vendors
-//             viewAllVendors();
+             viewAllVendors();
          } else if (adminAction == 2) {
              // Create new tender
 //             createNewTender();
@@ -42,4 +51,15 @@ public class AdminUi {
              System.out.println("Invalid action. Please try again.");
          }
      }
+
+	private static void viewAllVendors() throws SomethingWentWrongException {
+		// TODO Auto-generated method stub
+		
+		AdminDAO adao = new AdminDAOImpl();
+		List<vendor> v = adao.getAllVendors();
+		
+		Consumer<vendor> con = ven -> System.out.println("Vendor Id " + ven.getId() + " Name " + ven.getName() 
+		+ " username " + ven.getUsername() + " password " + ven.getPassword());
+		v.forEach(con);
+	}
 	}

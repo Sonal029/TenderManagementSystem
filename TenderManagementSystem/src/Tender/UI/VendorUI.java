@@ -61,8 +61,18 @@ public class VendorUI
 	    VendorDAO vdao= new VendorDAOImpl();
 	    vdao.vendorRegistration(v);
 	    System.out.println("Vendor registered sucessfully");
-		
-	    vendorAuthentication(sc);
+	    System.out.println("1.login");
+	    System.out.println("2. exit");
+        Scanner scanner = new Scanner(System.in);
+        int ch= scanner.nextInt();
+        if(ch==1)
+        {
+           vendorAuthentication(scanner);
+        }
+        else
+        {
+        	System.out.println("Thanks for registering");
+        }
 	    
 	}
 

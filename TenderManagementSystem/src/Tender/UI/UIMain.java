@@ -3,9 +3,11 @@ package Tender.UI;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import Tender.Exception.SomethingWentWrongException;
+
 public class UIMain 
 {
-	public static void main(String[] args) throws ClassNotFoundException, SQLException {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException, SomethingWentWrongException {
 		Scanner sc = new Scanner(System.in);
 		 System.out.println("Welcome to the Tender Management System!");
          System.out.println("Please select your user type:");

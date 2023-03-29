@@ -68,6 +68,13 @@ public class vendorImpl implements vendor
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return "vendor_id=" + id + ", name=" + name + ", username=" + username + ", password=" + password ;
+	}
 	
 	
 }
