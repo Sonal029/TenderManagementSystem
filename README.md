@@ -1,4 +1,4 @@
-Tender Management System
+# Tender Management System
 
 Whenever a company requires a service/merchandise, a tender is floated. The
 company maintains an empaneled list of Vendors. An empaneled vendor can only bid
@@ -11,16 +11,12 @@ There are 2 users in the system:
 2. Vendor
 
 The Role of the Administrator is:
-Note: Don't create a table to store the credentials of the administrator. Keep the
-username and password fixed for admin (like username: ‘admin’ password: ‘admin’)
 1. Login with his account.
 2. View all the vendors.
 3. Create new tenders.
 4. View All the Tenders.
 5. View All the Bids of a tender.
 6. Assign tender to a vendor.
-
-Tender Management System 2
 7. Logout
 
 The Role of a Vendor is:
@@ -43,5 +39,5 @@ Features
 # ![image](https://i.ibb.co/zRjq2Gp/Whats-App-Image-2023-03-26-at-9-57-11-AM.jpg)
 
 
-Authors
+Author
 @Shakambhari
