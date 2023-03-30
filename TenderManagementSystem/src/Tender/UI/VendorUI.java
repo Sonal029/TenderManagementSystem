@@ -16,6 +16,7 @@ import Tender.Exception.SomethingWentWrongException;
 
 public class VendorUI 
 {
+	static Scanner sc = new Scanner(System.in);
 	public static void displayMenuOfVendor(Scanner sc) throws SomethingWentWrongException
 	{
 		
@@ -61,6 +62,7 @@ public class VendorUI
 		+ " Budget " + ten.getTendor_budget() + " Status " + ten.getStatus());
 		
 		v.forEach(con);
+		displayMenuOfVendor(sc);
 	}
 
 	public static void vendorRegistration(Scanner sc) throws SQLException, ClassNotFoundException, SomethingWentWrongException {

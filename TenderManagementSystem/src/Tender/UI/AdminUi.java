@@ -16,6 +16,7 @@ import Tender.Exception.SomethingWentWrongException;
 
 public class AdminUi {
 
+	static Scanner sc = new Scanner(System.in);
 	public static void displayMenuOfAdmin(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException 
 	{
 		System.out.println("1. View all the vendors.");
@@ -56,8 +57,9 @@ public class AdminUi {
      }
 
 
-	private static void viewAllTenders() throws SomethingWentWrongException {
+	private static void viewAllTenders() throws SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
+		
 		AdminDAO adao = new AdminDAOImpl();
 		List<tendor> v = adao.viewAllTendors();
 		
@@ -66,10 +68,12 @@ public class AdminUi {
 		
 		v.forEach(con);
 		
+		displayMenuOfAdmin(sc);
+		
 	}
 
 
-	private static void createNewTender(Scanner sc) {
+	private static void createNewTender(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
 		
 		
@@ -86,10 +90,12 @@ public class AdminUi {
 	     
 	    TenderDAO vdao= new TenderDAOImpl();
 	    vdao.createNewTender(v);
+	    
+	    displayMenuOfAdmin(sc);
 	}
 
 
-	private static void viewAllVendors() throws NoRecordFoundException  {
+	private static void viewAllVendors() throws NoRecordFoundException, SomethingWentWrongException  {
 		// TODO Auto-generated method stub
 		
 		AdminDAO adao = new AdminDAOImpl();
@@ -100,10 +106,8 @@ public class AdminUi {
 			
 			System.out.println(e.getMessage());
 		}
-//		
-//		Consumer<vendor> con = ven -> System.out.println("Vendor Id " + ven.getId() + " Name " + ven.getName() 
-//		+ " username " + ven.getUsername() + " password " + ven.getPassword());
-//		v.forEach(con);
+		
+		displayMenuOfAdmin(sc);
 	}
 	
 	
