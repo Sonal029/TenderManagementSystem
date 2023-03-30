@@ -7,9 +7,4 @@ public class NoRecordFoundException extends Exception {
 			super(message);
 		}
 
-		@Override
-		public String toString() {
-			return getMessage();
-		}	
-
 }

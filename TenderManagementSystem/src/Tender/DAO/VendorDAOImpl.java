@@ -4,8 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
+import Tender.DTO.tendor;
+import Tender.DTO.tendorImpl;
 import Tender.DTO.vendor;
+import Tender.Exception.NoRecordFoundException;
+import Tender.Exception.SomethingWentWrongException;
 import Tender.UI.VendorUI;
 
 public class VendorDAOImpl implements VendorDAO
@@ -83,5 +88,48 @@ public class VendorDAOImpl implements VendorDAO
 		}
 		return flag;
 	}
-    
+
+	@Override
+	public List<tendor> viewAllCurrentTenders() throws SomethingWentWrongException {
+		Connection conn =null;
+		List<tendor> tendors = null;
+		try {
+				//connect to database
+				conn = Utils.getConnectionTodatabase();
+				//prepare the query
+				String QUERY = "SELECT * FROM tendor where status = 'active'";
+				
+				//get the prepared statement object
+				PreparedStatement ps = conn.prepareStatement(QUERY);
+				
+				//execute query
+				ResultSet resultSet = ps.executeQuery();
+				if(Utils.isResultSetEmpty(resultSet)) {
+					throw new NoRecordFoundException("No tendor found");
+				}
+				while (resultSet.next()) 
+				{
+	                tendors.add(new tendorImpl(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3),resultSet.getString(4)));  
+				}
+				
+		}
+		catch(SQLException | ClassNotFoundException | NoRecordFoundException sqlEx) {
+			//code to log the error in the file
+			throw new SomethingWentWrongException("No data found");
+		}
+		finally 
+		{
+			try 
+			{
+				//close the exception
+			  Utils.closeConnection(conn);				
+			}
+			catch(SQLException sqlEX) 
+			{
+				
+			}
+		}
+		return tendors;
+	}
 }
+    

@@ -1,15 +1,22 @@
 package Tender.UI;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Scanner;
+import java.util.function.Consumer;
+
+import Tender.DAO.AdminDAO;
+import Tender.DAO.AdminDAOImpl;
 import Tender.DAO.VendorDAO;
 import Tender.DAO.VendorDAOImpl;
+import Tender.DTO.tendor;
 import Tender.DTO.vendor;
 import Tender.DTO.vendorImpl;
+import Tender.Exception.SomethingWentWrongException;
 
 public class VendorUI 
 {
-	public static void displayMenuOfVendor(Scanner sc)
+	public static void displayMenuOfVendor(Scanner sc) throws SomethingWentWrongException
 	{
 		
 		System.out.println("Vendor actions:");
@@ -22,7 +29,7 @@ public class VendorUI
 
         if (vendorAction == 1) {
             // View all current tenders
-//           viewAllTenders();
+           viewAllCurrentTenders();
         } 
         else if (vendorAction == 2) {
             // Place a bid against a tender
@@ -45,7 +52,18 @@ public class VendorUI
         }
     }
 
-	public static void vendorRegistration(Scanner sc) throws SQLException, ClassNotFoundException {
+	private static void viewAllCurrentTenders() throws SomethingWentWrongException {
+		// TODO Auto-generated method stub
+		VendorDAO adao = new VendorDAOImpl();
+		List<tendor> v = adao.viewAllCurrentTenders();
+		
+		Consumer<tendor> con = ten -> System.out.println("Tendor Id " + ten.getTendor_id() + " Description " + ten.getTendor_desc() 
+		+ " Budget " + ten.getTendor_budget() + " Status " + ten.getStatus());
+		
+		v.forEach(con);
+	}
+
+	public static void vendorRegistration(Scanner sc) throws SQLException, ClassNotFoundException, SomethingWentWrongException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter id");
 		String id = sc.next();
@@ -76,7 +94,7 @@ public class VendorUI
 	    
 	}
 
-	public static void vendorAuthentication(Scanner sc) {
+	public static void vendorAuthentication(Scanner sc) throws SomethingWentWrongException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter Username and password");
 		String user = sc.next();
