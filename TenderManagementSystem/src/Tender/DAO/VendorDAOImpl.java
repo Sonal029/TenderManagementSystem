@@ -1,11 +1,13 @@
 package Tender.DAO;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import Tender.DTO.Bid;
 import Tender.DTO.tendor;
 import Tender.DTO.tendorImpl;
 import Tender.DTO.vendor;
@@ -130,6 +132,38 @@ public class VendorDAOImpl implements VendorDAO
 			}
 		}
 		return tendors;
+	}
+
+	@Override
+	public void placeBid(Bid b) {
+		// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
+				Connection conn = null;
+				try
+				{
+					conn = Utils.getConnectionTodatabase();
+					 String query = "Insert into bid values(?,?,?,?)";
+					 PreparedStatement ps = conn.prepareStatement(query);
+					 
+					ps.setString(1, b.getTendorId()); 
+					ps.setString(2, b.getVendorId());
+					ps.setInt(3, b.getBidAmount());
+					ps.setDate(4, Date.valueOf(b.getBidDate()));
+					ps.executeUpdate();
+				}
+				
+				catch(SQLException | ClassNotFoundException ex)
+				{
+					System.out.println(ex);
+				}
+				finally
+				{
+					try {
+						Utils.closeConnection(conn);
+					}catch(SQLException ex) {
+						
+					}
+				}
 	}
 }
     

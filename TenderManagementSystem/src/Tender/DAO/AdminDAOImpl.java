@@ -45,50 +45,10 @@ public class AdminDAOImpl implements AdminDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-//		try
-//				//connect to database
-//				conn = Utils.getConnectionTodatabase();
-//				//prepare the query
-//				String QUERY = "SELECT * FROM vendor";
-//				
-//				//get the prepared statement object
-//				PreparedStatement ps = conn.prepareStatement(QUERY);
-//				
-//				//execute query
-//				ResultSet resultSet = ps.executeQuery();
-//				if(Utils.isResultSetEmpty(resultSet)) {
-//					throw new NoRecordFoundException("No vendor found");
-//				}
-//				while (resultSet.next()) 
-//				{
-////	                vendors.add(new vendorImpl(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3),resultSet.getString(4)));  
-//				   System.out.println(resultSet.getString(1));
-//				   System.out.println(resultSet.getString(2));
-//				   System.out.println(resultSet.getString(3));
-//				   System.out.println(resultSet.getString(4));
-//				}
-//				
-//		}
-//		catch(SQLException | ClassNotFoundException | NoRecordFoundException sqlEx) {
-//			//code to log the error in the file
-//			throw new SomethingWentWrongException("Something Went Wrong Exception");
-//		}
-//		finally 
-//		{
-//			try 
-//			{
-//				//close the exception
-//			  Utils.closeConnection(conn);				
-//			}
-//			catch(SQLException sqlEX) 
-//			{
-//			}
-//		}
 		return vendors;
 	}
-
+		
+			
 	@Override
 	public List<tendor> viewAllTendors() throws SomethingWentWrongException {
 		Connection conn =null;

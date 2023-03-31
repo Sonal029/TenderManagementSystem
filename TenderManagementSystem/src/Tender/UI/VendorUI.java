@@ -1,14 +1,15 @@
 package Tender.UI;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 import java.util.function.Consumer;
 
-import Tender.DAO.AdminDAO;
-import Tender.DAO.AdminDAOImpl;
 import Tender.DAO.VendorDAO;
 import Tender.DAO.VendorDAOImpl;
+import Tender.DTO.Bid;
+import Tender.DTO.BidImpl;
 import Tender.DTO.tendor;
 import Tender.DTO.vendor;
 import Tender.DTO.vendorImpl;
@@ -34,7 +35,7 @@ public class VendorUI
         } 
         else if (vendorAction == 2) {
             // Place a bid against a tender
-//            placeBid();
+            placeBid();
         } 
         else if (vendorAction == 3) {
             // View the status of a bid
@@ -52,6 +53,24 @@ public class VendorUI
             System.out.println("Invalid action. Please try again.");
         }
     }
+
+	private static void placeBid() throws SomethingWentWrongException {
+		// TODO Auto-generated method stub
+		System.out.println("Enter tendor id");
+		String t_id = sc.next();
+		System.out.println("Enter vendor id");
+		String v_id = sc.next();
+		System.out.println("Enter bidding amount");
+		int amt = sc.nextInt();
+		System.out.println("Enter Bidding date");
+		LocalDate bidDate = LocalDate.parse(sc.next());
+		
+		Bid b = new BidImpl(t_id,v_id,amt,bidDate);
+		VendorDAO vdao= new VendorDAOImpl();
+	    vdao.placeBid(b);
+	    System.out.println("Bid placed sucessfully");
+	    displayMenuOfVendor(sc);
+	}
 
 	private static void viewAllCurrentTenders() throws SomethingWentWrongException {
 		// TODO Auto-generated method stub

@@ -15,6 +15,7 @@ public BidImpl(String tendorId, String vendorId, int bidAmount, LocalDate bidDat
 	this.bidAmount = bidAmount;
 	this.bidDate = bidDate;
 }
+
 public String getTendorId() {
 	return tendorId;
 }
