@@ -111,7 +111,7 @@ public class VendorDAOImpl implements VendorDAO
 				}
 				while (resultSet.next()) 
 				{
-	                tendors.add(new tendorImpl(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3),resultSet.getString(4)));  
+	                System.out.println("Tendor Id: "+(resultSet.getString(1)+", Tendor Description: "+resultSet.getString(2)+", Budget: "+resultSet.getInt(3)+", Tendor Date: "+ resultSet.getDate(4)+ ", Status: "+resultSet.getString(5)));  
 				}
 				
 		}
@@ -136,19 +136,19 @@ public class VendorDAOImpl implements VendorDAO
 
 	@Override
 	public void placeBid(Bid b) {
-		// TODO Auto-generated method stub
-		// TODO Auto-generated method stub
+		
 				Connection conn = null;
 				try
 				{
 					conn = Utils.getConnectionTodatabase();
-					 String query = "Insert into bid values(?,?,?,?)";
+					 String query = "Insert into bid values(?,?,?,?,?)";
 					 PreparedStatement ps = conn.prepareStatement(query);
 					 
 					ps.setString(1, b.getTendorId()); 
 					ps.setString(2, b.getVendorId());
 					ps.setInt(3, b.getBidAmount());
 					ps.setDate(4, Date.valueOf(b.getBidDate()));
+					ps.setString(5, b.getStatus());
 					ps.executeUpdate();
 				}
 				
@@ -164,6 +164,37 @@ public class VendorDAOImpl implements VendorDAO
 						
 					}
 				}
+	}
+
+	@Override
+	public void viewBidHistory(String vendor_id) throws SomethingWentWrongException {
+		Connection conn =null;
+		List<Bid> bids = null;
+		try {
+			conn=Utils.getConnectionTodatabase();
+			String query ="SELECT * FROM bid where  vendor_id= ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, vendor_id);
+			ResultSet rs = ps.executeQuery();
+			if(Utils.isResultSetEmpty(rs)) {
+				throw new NoRecordFoundException("Data Not Available");
+			}
+			else
+			{
+				while(rs.next())
+				{
+					System.out.println("Tendor id: "+rs.getString(1)+", Vendor id: "+rs.getString(2)+", Bidding Amount: "+rs.getInt(3)+", Bidding Date: "+rs.getDate(4)+", Status: "+rs.getString(5));
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			throw new SomethingWentWrongException("Some thing went Wrong");
+		} catch (SQLException e) {
+			
+		} catch (NoRecordFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 }
     

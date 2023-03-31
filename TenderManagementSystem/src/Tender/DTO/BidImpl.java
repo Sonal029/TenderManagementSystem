@@ -8,14 +8,15 @@ public class BidImpl implements Bid
    private String vendorId;
    private int bidAmount;
    private LocalDate bidDate;
-public BidImpl(String tendorId, String vendorId, int bidAmount, LocalDate bidDate) {
+   private String status;
+public BidImpl(String tendorId, String vendorId, int bidAmount, LocalDate bidDate, String status) {
 	super();
 	this.tendorId = tendorId;
 	this.vendorId = vendorId;
 	this.bidAmount = bidAmount;
 	this.bidDate = bidDate;
+	this.status = status;
 }
-
 public String getTendorId() {
 	return tendorId;
 }
@@ -40,6 +41,12 @@ public LocalDate getBidDate() {
 public void setBidDate(LocalDate bidDate) {
 	this.bidDate = bidDate;
 }
-   
-   
+public String getStatus() {
+	return status;
 }
+public void setStatus(String status) {
+	this.status = status;
+}
+
+}
+

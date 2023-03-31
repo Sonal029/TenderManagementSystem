@@ -17,4 +17,6 @@ public interface VendorDAO
    
    public void placeBid(Bid b);
 
+   public void viewBidHistory(String vendor_id) throws SomethingWentWrongException;
+
 }

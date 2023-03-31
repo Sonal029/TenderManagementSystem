@@ -1,5 +1,6 @@
 package Tender.DAO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import Tender.DTO.Bid;
@@ -12,7 +13,7 @@ public interface AdminDAO
 {
 	public List<vendor> getAllVendors() throws SomethingWentWrongException, NoRecordFoundException;
 
-	public List<tendor> viewAllTendors() throws SomethingWentWrongException;
+	public List<tendor> viewAllTendors() throws NoRecordFoundException,SomethingWentWrongException;
     
-	public List<Bid> viewBids(String tenderId);
+	public List<Bid> viewBids(String tenderId) throws SomethingWentWrongException;
 }

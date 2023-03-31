@@ -32,71 +32,82 @@ public class AdminDAOImpl implements AdminDAO{
 			{
 				while(rs.next())
 				{
-					System.out.println(rs.getString(1));
-					System.out.println(rs.getString(2));
-					System.out.println(rs.getString(3));
-					System.out.println(rs.getString(4));
+					System.out.println("Vendor Id: "+(rs.getString(1)+", Vendor Description: "+rs.getString(2)+", Username: "+rs.getString(3)+", Password: "+rs.getString(4)));  
+					
 				}
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			throw new SomethingWentWrongException("Some thing went Wrong");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 		return vendors;
 	}
 		
-			
 	@Override
 	public List<tendor> viewAllTendors() throws SomethingWentWrongException {
 		Connection conn =null;
 		List<tendor> tendors = null;
 		try {
-				//connect to database
-				conn = Utils.getConnectionTodatabase();
-				//prepare the query
-				String QUERY = "SELECT * FROM tendor where status = 'active'";
-				
-				//get the prepared statement object
-				PreparedStatement ps = conn.prepareStatement(QUERY);
-				
-				//execute query
-				ResultSet resultSet = ps.executeQuery();
-				if(Utils.isResultSetEmpty(resultSet)) {
-					throw new NoRecordFoundException("No vendor found");
-				}
-				while (resultSet.next()) 
+			conn=Utils.getConnectionTodatabase();
+			String query ="SELECT * FROM tendor where status = 'active'";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ResultSet rs = ps.executeQuery();
+			if(Utils.isResultSetEmpty(rs)) {
+				throw new NoRecordFoundException("Data Not Available");
+			}
+			else
+			{
+				while(rs.next())
 				{
-	                tendors.add(new tendorImpl(resultSet.getString(1), resultSet.getString(2), resultSet.getInt(3),resultSet.getString(4)));  
+					System.out.println("Tendor Id: "+(rs.getString(1)+", Tendor Description: "+rs.getString(2)+", Budget: "+rs.getInt(3)+", Tender Date: "+rs.getDate(4)+ ", Status: "+rs.getString(5)));  
+					 
 				}
-				
-		}
-		catch(SQLException | ClassNotFoundException | NoRecordFoundException sqlEx) {
-			//code to log the error in the file
-			throw new SomethingWentWrongException("No data found");
-		}
-		finally 
-		{
-			try 
-			{
-				//close the exception
-			  Utils.closeConnection(conn);				
 			}
-			catch(SQLException sqlEX) 
-			{
-				
-			}
-		}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			throw new SomethingWentWrongException("Some thing went Wrong");
+		} catch (SQLException e) {
+			
+		} catch (NoRecordFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 		return tendors;
 		
 	}
 
 	@Override
-	public List<Bid> viewBids(String tenderId) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Bid> viewBids(String tenderId) throws SomethingWentWrongException {
+		Connection conn =null;
+		List<Bid> bids = null;
+		try {
+			conn=Utils.getConnectionTodatabase();
+			String query ="SELECT * FROM bid where  tendor_id= ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, tenderId);
+			ResultSet rs = ps.executeQuery();
+			if(Utils.isResultSetEmpty(rs)) {
+				throw new NoRecordFoundException("Data Not Available");
+			}
+			else
+			{
+				while(rs.next())
+				{
+					System.out.println("Tendor id: "+rs.getString(1)+", Vendor id: "+rs.getString(2)+", Bidding Amount: "+rs.getInt(3)+", Bidding Date: "+rs.getDate(4)+", Status: "+rs.getString(5));
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			throw new SomethingWentWrongException("Some thing went Wrong");
+		} catch (SQLException e) {
+			
+		} catch (NoRecordFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return bids;
 	}
 	
 	

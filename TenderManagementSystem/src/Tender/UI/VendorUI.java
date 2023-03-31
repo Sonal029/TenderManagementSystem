@@ -26,7 +26,8 @@ public class VendorUI
         System.out.println("2. Place a bid against a tender");
         System.out.println("3. View the status of a bid");
         System.out.println("4. View bid history");
-        System.out.println("5. Exit");
+        System.out.println("5. Search for tender on the basis of Tender id");
+        System.out.println("6. Exit");
         int vendorAction = sc.nextInt();
 
         if (vendorAction == 1) {
@@ -43,9 +44,9 @@ public class VendorUI
         } 
         else if (vendorAction == 4) {
             // View bid history
-//            viewBidHistory();
+             viewBidHistory(sc);
         }
-        else if (vendorAction == 5) {
+        else if (vendorAction == 6) {
             // Exit
            System.out.println("Thanks for using our services");
         } 
@@ -54,7 +55,20 @@ public class VendorUI
         }
     }
 
-	private static void placeBid() throws SomethingWentWrongException {
+	public static void viewBidHistory(Scanner sc) throws SomethingWentWrongException {
+		// TODO Auto-generated method stub
+		System.out.println("Enter your vendor id to check your history");
+		String vendor_id=sc.next();
+		
+		VendorDAO vdao= new VendorDAOImpl();
+		vdao.viewBidHistory(vendor_id);
+		System.out.println();
+		System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+	    System.out.println();
+		displayMenuOfVendor(sc);
+	}
+
+	public static void placeBid() throws SomethingWentWrongException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter tendor id");
 		String t_id = sc.next();
@@ -64,24 +78,33 @@ public class VendorUI
 		int amt = sc.nextInt();
 		System.out.println("Enter Bidding date");
 		LocalDate bidDate = LocalDate.parse(sc.next());
+		String status = "active";
 		
-		Bid b = new BidImpl(t_id,v_id,amt,bidDate);
+		Bid b = new BidImpl(t_id,v_id,amt,bidDate,status);
 		VendorDAO vdao= new VendorDAOImpl();
 	    vdao.placeBid(b);
 	    System.out.println("Bid placed sucessfully");
+	    System.out.println();
+		System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+	    System.out.println();
 	    displayMenuOfVendor(sc);
 	}
 
-	private static void viewAllCurrentTenders() throws SomethingWentWrongException {
+	public static void viewAllCurrentTenders() throws SomethingWentWrongException {
 		// TODO Auto-generated method stub
 		VendorDAO adao = new VendorDAOImpl();
-		List<tendor> v = adao.viewAllCurrentTenders();
-		
-		Consumer<tendor> con = ten -> System.out.println("Tendor Id " + ten.getTendor_id() + " Description " + ten.getTendor_desc() 
-		+ " Budget " + ten.getTendor_budget() + " Status " + ten.getStatus());
-		
-		v.forEach(con);
-		displayMenuOfVendor(sc);
+		try
+		{
+		  List<tendor> t = adao.viewAllCurrentTenders();
+		}
+		catch(SomethingWentWrongException ex)
+		{
+			System.out.println(ex.getMessage());
+		}
+		System.out.println();
+		System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+	    System.out.println();
+	    displayMenuOfVendor(sc);
 	}
 
 	public static void vendorRegistration(Scanner sc) throws SQLException, ClassNotFoundException, SomethingWentWrongException {

@@ -1,13 +1,14 @@
 package Tender.UI;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 import Tender.DAO.AdminDAO;
 import Tender.DAO.AdminDAOImpl;
 import Tender.DAO.TenderDAO;
 import Tender.DAO.TenderDAOImpl;
+import Tender.DTO.Bid;
 import Tender.DTO.tendor;
 import Tender.DTO.tendorImpl;
 import Tender.DTO.vendor;
@@ -39,13 +40,13 @@ public class AdminUi {
              viewAllTenders();
          } else if (adminAction == 4) {
              // View all bids of a tender
-//             viewAllBids();
+               viewAllBids();
          } else if (adminAction == 5) {
              // Assign tender to a vendor
 //            assignTender();
          } else if (adminAction == 6) {
 //             Logout
-//             logout();
+              logout();
          } 
          else if (adminAction == 0) {
         	 System.out.println("Thanks for using our service");
@@ -57,45 +58,84 @@ public class AdminUi {
      }
 
 
-	private static void viewAllTenders() throws SomethingWentWrongException, NoRecordFoundException {
+	private static void logout() {
+		// TODO Auto-generated method stub
+		System.out.println("Thank you Admin");
+	}
+
+
+	public static void viewAllBids() throws SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
 		
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter tender id to view its bid");
+		String tenderId= sc.next();
 		AdminDAO adao = new AdminDAOImpl();
-		List<tendor> v = adao.viewAllTendors();
-		
-		Consumer<tendor> con = ten -> System.out.println("Tendor Id " + ten.getTendor_id() + " Description " + ten.getTendor_desc() 
-		+ " Budget " + ten.getTendor_budget() + " Status " + ten.getStatus());
-		
-		v.forEach(con);
-		
-		displayMenuOfAdmin(sc);
+		try
+		{
+			List<Bid> b = adao.viewBids(tenderId);
+		}
+		catch (SomethingWentWrongException e) {
+			// TODO Auto-generated catch block
+			
+			System.out.println(e.getMessage());
+		}
+		 System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+		    displayMenuOfAdmin(sc);
 		
 	}
 
 
-	private static void createNewTender(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException {
+	private static void viewAllTenders() throws SomethingWentWrongException, NoRecordFoundException {
+		// TODO Auto-generated method stub
+		
+		AdminDAO adao = new AdminDAOImpl();
+		try
+		{
+			List<tendor> t = adao.viewAllTendors();
+		
+		}
+		catch (SomethingWentWrongException e) {
+			// TODO Auto-generated catch block
+			
+			System.out.println(e.getMessage());
+		}
+		 System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+		    displayMenuOfAdmin(sc);
+		
+		
+	}
+
+
+	public static void createNewTender(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
 		
 		
 		System.out.println("Enter tendor_id");
 		String id = sc.next();
+		sc.nextLine();
 		System.out.println("Enter Description");
 		String tendor_desc = sc.nextLine();
-		System.out.println("Enter tendorbudget");
+
+		System.out.println("Enter tendorbudget in crores");
 		int tendor_budget = sc.nextInt();
-		System.out.println("Enter password");
+		
+		System.out.println("Enter date of issuing the tender");
+		LocalDate tender_date = LocalDate.parse(sc.next());
+		System.out.println("Enter status");
 		String status = sc.next();
 		
-	    tendor v = new tendorImpl(id,tendor_desc,tendor_budget,status);
+	    tendor t = new tendorImpl(id,tendor_desc,tendor_budget,tender_date,status);
 	     
-	    TenderDAO vdao= new TenderDAOImpl();
-	    vdao.createNewTender(v);
-	    
+	    TenderDAO tdao= new TenderDAOImpl();
+	    tdao.createNewTender(t);
+	    System.out.println("Tender created sucessfully");
+	    System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
 	    displayMenuOfAdmin(sc);
 	}
 
 
-	private static void viewAllVendors() throws NoRecordFoundException, SomethingWentWrongException  {
+	public static void viewAllVendors() throws NoRecordFoundException, SomethingWentWrongException  {
 		// TODO Auto-generated method stub
 		
 		AdminDAO adao = new AdminDAOImpl();
@@ -106,7 +146,7 @@ public class AdminUi {
 			
 			System.out.println(e.getMessage());
 		}
-		
+		System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
 		displayMenuOfAdmin(sc);
 	}
 	
