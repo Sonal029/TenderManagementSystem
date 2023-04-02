@@ -43,7 +43,7 @@ public class AdminUi {
                viewAllBids();
          } else if (adminAction == 5) {
              // Assign tender to a vendor
-//            assignTender();
+            assignTender();
          } else if (adminAction == 6) {
 //             Logout
               logout();
@@ -56,6 +56,29 @@ public class AdminUi {
              System.out.println("Invalid action. Please try again.");
          }
      }
+
+
+	private static void assignTender() throws SomethingWentWrongException, NoRecordFoundException {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Enetr tender id for which the bid is to be assigned");
+		String tendor_id = sc.next();
+		AdminDAO adao = new AdminDAOImpl();
+		try
+		{
+		    adao.assignTender(tendor_id);
+//		    System.out.println("the query has been assigned for tender id : "+tendor_id);
+		}
+		catch (SomethingWentWrongException e) {
+			// TODO Auto-generated catch block
+			
+			System.out.println(e.getMessage());
+		}
+		 System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+		    displayMenuOfAdmin(sc);
+		
+	}
 
 
 	private static void logout() {

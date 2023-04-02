@@ -16,4 +16,8 @@ public interface AdminDAO
 	public List<tendor> viewAllTendors() throws NoRecordFoundException,SomethingWentWrongException;
     
 	public List<Bid> viewBids(String tenderId) throws SomethingWentWrongException;
+     
+	public void assignTender(String tender_id) throws SomethingWentWrongException, NoRecordFoundException;
+	
+	
 }

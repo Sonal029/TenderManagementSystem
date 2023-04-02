@@ -8,9 +8,7 @@ import java.util.List;
 
 import Tender.DTO.Bid;
 import Tender.DTO.tendor;
-import Tender.DTO.tendorImpl;
 import Tender.DTO.vendor;
-import Tender.DTO.vendorImpl;
 import Tender.Exception.NoRecordFoundException;
 import Tender.Exception.SomethingWentWrongException;
 
@@ -108,6 +106,41 @@ public class AdminDAOImpl implements AdminDAO{
 			e.printStackTrace();
 		} 
 		return bids;
+	}
+
+	@Override
+	public void assignTender(String tender_id) throws SomethingWentWrongException, NoRecordFoundException {
+		// TODO Auto-generated method stub
+		Connection conn = null;
+		
+		try {
+			conn = Utils.getConnectionTodatabase();
+			
+			String Q1="SELECT MIN(bid_amount) FROM bid  WHERE tendor_id = ?";
+			String Q2= "UPDATE bid SET isDelete = 1  WHERE tendor_id = ? AND bid_amount != ?";
+//			String query1 = "Select * from bid";
+
+			PreparedStatement ps = conn.prepareStatement(Q1);
+			ps.setString(1, tender_id);
+			
+			ResultSet rs = ps.executeQuery();
+			if(Utils.isResultSetEmpty(rs)) {
+				throw new NoRecordFoundException("Data Not Available");
+			}
+			rs.next();
+			int amount = rs.getInt(1);
+			
+			PreparedStatement ps1 = conn.prepareStatement(Q2);
+			ps1.setString(1, tender_id);
+			ps1.setInt(2, amount);
+			ps1.executeUpdate();
+			System.out.println("Data Updated");
+			
+			
+		} catch (ClassNotFoundException | SQLException e) {
+			throw new SomethingWentWrongException("There is something wrong");
+		}
+		
 	}
 	
 	

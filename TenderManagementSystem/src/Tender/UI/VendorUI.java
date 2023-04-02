@@ -40,7 +40,7 @@ public class VendorUI
         } 
         else if (vendorAction == 3) {
             // View the status of a bid
-//           viewBidStatus();
+           viewBidStatus();
         } 
         else if (vendorAction == 4) {
             // View bid history
@@ -54,6 +54,11 @@ public class VendorUI
             System.out.println("Invalid action. Please try again.");
         }
     }
+
+	private static void viewBidStatus() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	public static void viewBidHistory(Scanner sc) throws SomethingWentWrongException {
 		// TODO Auto-generated method stub
