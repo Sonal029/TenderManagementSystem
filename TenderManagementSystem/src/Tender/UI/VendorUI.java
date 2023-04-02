@@ -52,12 +52,21 @@ public class VendorUI
         } 
         else {
             System.out.println("Invalid action. Please try again.");
+            System.out.println();
+    		System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+    	    System.out.println();
+    		displayMenuOfVendor(sc);
         }
     }
 
-	private static void viewBidStatus() {
+	private static void viewBidStatus() throws SomethingWentWrongException {
 		// TODO Auto-generated method stub
-		
+		System.out.println("Enter your vendor id to check your history");
+		String vendor_id=sc.next();
+		System.out.println("Enter your tendor id to check your history");
+		String tendor_id=sc.next();
+		VendorDAO vdao= new VendorDAOImpl();
+		vdao.viewBidStatus(vendor_id,tendor_id);
 	}
 
 	public static void viewBidHistory(Scanner sc) throws SomethingWentWrongException {

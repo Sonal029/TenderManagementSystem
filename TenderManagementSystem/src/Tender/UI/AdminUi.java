@@ -54,6 +54,10 @@ public class AdminUi {
 		 
          else {
              System.out.println("Invalid action. Please try again.");
+             System.out.println();
+    		 System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+    		 System.out.println();   
+    		 displayMenuOfAdmin(sc);
          }
      }
 
@@ -62,21 +66,22 @@ public class AdminUi {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Enetr tender id for which the bid is to be assigned");
+		System.out.println("Enter tender id for which the bid is to be assigned");
 		String tendor_id = sc.next();
 		AdminDAO adao = new AdminDAOImpl();
 		try
 		{
 		    adao.assignTender(tendor_id);
-//		    System.out.println("the query has been assigned for tender id : "+tendor_id);
 		}
-		catch (SomethingWentWrongException e) {
-			// TODO Auto-generated catch block
+		catch (SomethingWentWrongException e) 
+		{
 			
 			System.out.println(e.getMessage());
 		}
+		System.out.println();
 		 System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
-		    displayMenuOfAdmin(sc);
+		 System.out.println();   
+		 displayMenuOfAdmin(sc);
 		
 	}
 
@@ -103,8 +108,10 @@ public class AdminUi {
 			
 			System.out.println(e.getMessage());
 		}
+		System.out.println();
 		 System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
-		    displayMenuOfAdmin(sc);
+		 System.out.println();  
+		 displayMenuOfAdmin(sc);
 		
 	}
 
@@ -123,7 +130,9 @@ public class AdminUi {
 			
 			System.out.println(e.getMessage());
 		}
+		System.out.println();
 		 System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+		 System.out.println();
 		    displayMenuOfAdmin(sc);
 		
 		
@@ -153,7 +162,9 @@ public class AdminUi {
 	    TenderDAO tdao= new TenderDAOImpl();
 	    tdao.createNewTender(t);
 	    System.out.println("Tender created sucessfully");
+	    System.out.println();
 	    System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+	    System.out.println();
 	    displayMenuOfAdmin(sc);
 	}
 
@@ -169,7 +180,9 @@ public class AdminUi {
 			
 			System.out.println(e.getMessage());
 		}
+		 System.out.println();
 		System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+		 System.out.println();
 		displayMenuOfAdmin(sc);
 	}
 	

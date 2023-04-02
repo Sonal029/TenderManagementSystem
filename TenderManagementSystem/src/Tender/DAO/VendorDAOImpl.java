@@ -195,6 +195,56 @@ public class VendorDAOImpl implements VendorDAO
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		finally {
+			try {
+				Utils.closeConnection(conn);
+			}catch(SQLException ex) {
+				
+			}
+		}
 	}
+
+
+	
+	@Override
+	public void viewBidStatus(String vendor_id, String tendor_id) throws SomethingWentWrongException {
+		// TODO Auto-generated method stub
+		Connection conn =null;
+		List<Bid> bids = null;
+		try {
+			conn=Utils.getConnectionTodatabase();
+			String query ="SELECT tendor_id,vendor_id,bid_amount,bid_date,status FROM bid where  vendor_id=? AND tendor_id=?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, vendor_id);
+			ps.setString(2, tendor_id);
+			ResultSet rs = ps.executeQuery();
+			if(Utils.isResultSetEmpty(rs)) {
+				throw new NoRecordFoundException("Data Not Available");
+			}
+			else
+			{
+				while(rs.next())
+				{
+					System.out.println("Tendor id: "+rs.getString(1)+", Vendor id: "+rs.getString(2)+", Bidding Amount: "+rs.getInt(3)+", Bidding Date: "+rs.getDate(4)+", Status: "+rs.getString(5));
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			throw new SomethingWentWrongException("Some thing went Wrong");
+		} catch (SQLException e) {
+			
+		} catch (NoRecordFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		finally {
+			try {
+				Utils.closeConnection(conn);
+			}catch(SQLException ex) {
+				
+			}
+		}
+	}
+
 }
     

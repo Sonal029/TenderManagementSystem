@@ -118,7 +118,7 @@ public class AdminDAOImpl implements AdminDAO{
 			
 			String Q1="SELECT MIN(bid_amount) FROM bid  WHERE tendor_id = ?";
 			String Q2= "UPDATE bid SET isDelete = 1  WHERE tendor_id = ? AND bid_amount != ?";
-//			String query1 = "Select * from bid";
+			String query1 = "Select vendor_id from WHERE tendor_id = ? idDelete = 0 ";
 
 			PreparedStatement ps = conn.prepareStatement(Q1);
 			ps.setString(1, tender_id);
@@ -135,6 +135,22 @@ public class AdminDAOImpl implements AdminDAO{
 			ps1.setInt(2, amount);
 			ps1.executeUpdate();
 			System.out.println("Data Updated");
+			
+			PreparedStatement ps2 = conn.prepareStatement(query1);
+			ps1.setString(1, tender_id);
+			
+			ResultSet rs1 = ps.executeQuery();
+			if(Utils.isResultSetEmpty(rs1)) 
+			{
+				throw new NoRecordFoundException("Data Not Available");
+			}
+			else
+			{
+				while(rs.next())
+				{
+				   System.out.println("The tender has been alloted to"+rs1.getString(1));
+				}
+			}
 			
 			
 		} catch (ClassNotFoundException | SQLException e) {
