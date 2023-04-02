@@ -140,14 +140,15 @@ public class VendorDAOImpl implements VendorDAO
 				try
 				{
 					conn = Utils.getConnectionTodatabase();
-					 String query = "Insert into bid values(?,?,?,?,?)";
+					 String query = "Insert into bid values(?,?,?,?,?,?)";
 					 PreparedStatement ps = conn.prepareStatement(query);
 					 
 					ps.setString(1, b.getTendorId()); 
 					ps.setString(2, b.getVendorId());
 					ps.setInt(3, b.getBidAmount());
 					ps.setDate(4, Date.valueOf(b.getBidDate()));
-					ps.setString(5, b.getStatus());
+					ps.setString(5, "active");
+					ps.setInt(6, 1);
 					ps.executeUpdate();
 				}
 				
@@ -209,10 +210,9 @@ public class VendorDAOImpl implements VendorDAO
 	public void viewBidStatus(String vendor_id, String tendor_id) throws SomethingWentWrongException {
 		// TODO Auto-generated method stub
 		Connection conn =null;
-		List<Bid> bids = null;
 		try {
 			conn=Utils.getConnectionTodatabase();
-			String query ="SELECT tendor_id,vendor_id,bid_amount,bid_date,status FROM bid where  vendor_id=? AND tendor_id=?";
+			String query ="SELECT tendor_id,bid_amount,bid_date,status FROM bid where  vendor_id=? AND tendor_id=?";
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setString(1, vendor_id);
 			ps.setString(2, tendor_id);
@@ -224,7 +224,7 @@ public class VendorDAOImpl implements VendorDAO
 			{
 				while(rs.next())
 				{
-					System.out.println("Tendor id: "+rs.getString(1)+", Vendor id: "+rs.getString(2)+", Bidding Amount: "+rs.getInt(3)+", Bidding Date: "+rs.getDate(4)+", Status: "+rs.getString(5));
+					System.out.println("Tendor id: "+rs.getString(1)+", Bidding Amount: "+rs.getInt(2)+", Bidding Date: "+rs.getDate(3)+", Status: "+rs.getString(4));
 				}
 			}
 		} catch (ClassNotFoundException e) {

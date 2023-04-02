@@ -70,6 +70,11 @@ public class VendorUI
 		String tendor_id=sc.next();
 		VendorDAO vdao= new VendorDAOImpl();
 		vdao.search(tendor_id);
+		
+		System.out.println();
+ 		System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+ 	    System.out.println();
+ 		displayMenuOfVendor(sc);
 	}
 
 	private static void viewBidStatus() throws SomethingWentWrongException {
@@ -80,6 +85,11 @@ public class VendorUI
 		String tendor_id=sc.next();
 		VendorDAO vdao= new VendorDAOImpl();
 		vdao.viewBidStatus(vendor_id,tendor_id);
+		
+		 System.out.println();
+ 		System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+ 	    System.out.println();
+ 		displayMenuOfVendor(sc);
 	}
 
 	public static void viewBidHistory(Scanner sc) throws SomethingWentWrongException {
@@ -105,9 +115,8 @@ public class VendorUI
 		int amt = sc.nextInt();
 		System.out.println("Enter Bidding date");
 		LocalDate bidDate = LocalDate.parse(sc.next());
-		String status = "active";
 		
-		Bid b = new BidImpl(t_id,v_id,amt,bidDate,status);
+		Bid b = new BidImpl(t_id,v_id,amt,bidDate);
 		VendorDAO vdao= new VendorDAOImpl();
 	    vdao.placeBid(b);
 	    System.out.println("Bid placed sucessfully");
@@ -180,7 +189,8 @@ public class VendorUI
 		}
 		else
 		{
-			System.out.println("Incorrect credentials");
+			System.out.println("Incorrect credentials please try again");
+			vendorAuthentication(sc);
 		}
 	}
 	

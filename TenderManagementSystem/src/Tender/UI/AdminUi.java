@@ -1,5 +1,6 @@
 package Tender.UI;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -18,7 +19,7 @@ import Tender.Exception.SomethingWentWrongException;
 public class AdminUi {
 
 	static Scanner sc = new Scanner(System.in);
-	public static void displayMenuOfAdmin(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException 
+	public static void displayMenuOfAdmin(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException, ClassNotFoundException, SQLException 
 	{
 		System.out.println("1. View all the vendors.");
 		System.out.println("2. Create new tenders.");
@@ -62,7 +63,7 @@ public class AdminUi {
      }
 
 
-	private static void assignTender() throws SomethingWentWrongException, NoRecordFoundException {
+	private static void assignTender() throws SomethingWentWrongException, NoRecordFoundException, ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		
@@ -86,13 +87,18 @@ public class AdminUi {
 	}
 
 
-	private static void logout() {
+	private static void logout() throws ClassNotFoundException, SomethingWentWrongException, NoRecordFoundException, SQLException {
 		// TODO Auto-generated method stub
 		System.out.println("Thank you Admin");
+		
+		System.out.println();
+		 System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
+		 System.out.println(); 
+		UIMain.menu(sc);
 	}
 
 
-	public static void viewAllBids() throws SomethingWentWrongException, NoRecordFoundException {
+	public static void viewAllBids() throws SomethingWentWrongException, NoRecordFoundException, ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		
 		Scanner sc = new Scanner(System.in);
@@ -116,7 +122,7 @@ public class AdminUi {
 	}
 
 
-	private static void viewAllTenders() throws SomethingWentWrongException, NoRecordFoundException {
+	private static void viewAllTenders() throws SomethingWentWrongException, NoRecordFoundException, ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		
 		AdminDAO adao = new AdminDAOImpl();
@@ -139,7 +145,7 @@ public class AdminUi {
 	}
 
 
-	public static void createNewTender(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException {
+	public static void createNewTender(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException, ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		
 		
@@ -169,7 +175,7 @@ public class AdminUi {
 	}
 
 
-	public static void viewAllVendors() throws NoRecordFoundException, SomethingWentWrongException  {
+	public static void viewAllVendors() throws NoRecordFoundException, SomethingWentWrongException, ClassNotFoundException, SQLException  {
 		// TODO Auto-generated method stub
 		
 		AdminDAO adao = new AdminDAOImpl();

@@ -12,6 +12,5 @@ public interface Bid {
 	public void setBidAmount(int bidAmount);
 	public LocalDate getBidDate();
 	public void setBidDate(LocalDate bidDate);
-	public String getStatus();
-	public void setStatus(String status);
+
 }

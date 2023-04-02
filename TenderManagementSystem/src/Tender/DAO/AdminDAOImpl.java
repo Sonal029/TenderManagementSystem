@@ -132,11 +132,13 @@ public class AdminDAOImpl implements AdminDAO{
 			
 			String Q1="SELECT MIN(bid_amount) FROM bid  WHERE tendor_id = ?";
 			String Q2= "UPDATE bid SET isDelete = 1  WHERE tendor_id = ? AND bid_amount != ?";
-			String query1 = "Select vendor_id from WHERE tendor_id = ? idDelete = 0 ";
-
-			PreparedStatement ps = conn.prepareStatement(Q1);
-			ps.setString(1, tender_id);
+			String query1 = "Select vendor_id from bid WHERE tendor_id = ? AND isDelete = 0 ";
+            String query2 ="UPDATE bid SET status = 'rejected' where isDelete = 1";
 			
+            
+            
+            PreparedStatement ps = conn.prepareStatement(Q1);
+			ps.setString(1, tender_id);
 			ResultSet rs = ps.executeQuery();
 			if(Utils.isResultSetEmpty(rs)) {
 				throw new NoRecordFoundException("Data Not Available");
@@ -144,26 +146,30 @@ public class AdminDAOImpl implements AdminDAO{
 			rs.next();
 			int amount = rs.getInt(1);
 			
+			
 			PreparedStatement ps1 = conn.prepareStatement(Q2);
 			ps1.setString(1, tender_id);
 			ps1.setInt(2, amount);
 			ps1.executeUpdate();
-			System.out.println("Data Updated");
+//			System.out.println("Data Updated");
+			
+			
+			PreparedStatement ps3 = conn.prepareStatement(query2);
+			ps3.executeUpdate();
+//			System.out.println("Data Updated");
+			
 			
 			PreparedStatement ps2 = conn.prepareStatement(query1);
-			ps1.setString(1, tender_id);
-			
-			ResultSet rs1 = ps.executeQuery();
+			ps2.setString(1, tender_id);
+			ResultSet rs1 = ps2.executeQuery();
 			if(Utils.isResultSetEmpty(rs1)) 
 			{
 				throw new NoRecordFoundException("Data Not Available");
 			}
 			else
 			{
-				while(rs.next())
-				{
-				   System.out.println("The tender has been alloted to"+rs1.getString(1));
-				}
+				rs1.next();
+				System.out.println("The tender has been alloted to  : "+ rs1.getString(1));
 			}
 			
 			
