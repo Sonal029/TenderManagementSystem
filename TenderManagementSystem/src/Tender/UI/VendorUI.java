@@ -46,6 +46,11 @@ public class VendorUI
             // View bid history
              viewBidHistory(sc);
         }
+        else if(vendorAction == 5)
+        {
+//        Search for tender on the basis of Tender id
+        	searchTender(sc);
+        }
         else if (vendorAction == 6) {
             // Exit
            System.out.println("Thanks for using our services");
@@ -58,6 +63,14 @@ public class VendorUI
     		displayMenuOfVendor(sc);
         }
     }
+
+	private static void searchTender(Scanner sc2) throws SomethingWentWrongException {
+		// TODO Auto-generated method stub
+		System.out.println("Enter your tendor id to check your history");
+		String tendor_id=sc.next();
+		VendorDAO vdao= new VendorDAOImpl();
+		vdao.search(tendor_id);
+	}
 
 	private static void viewBidStatus() throws SomethingWentWrongException {
 		// TODO Auto-generated method stub

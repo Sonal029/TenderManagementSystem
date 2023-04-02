@@ -21,4 +21,6 @@ public interface VendorDAO
 
    public void viewBidStatus(String vendor_id, String tendor_id) throws SomethingWentWrongException;
 
+   public void search(String tendor_id) throws SomethingWentWrongException;
+
 }

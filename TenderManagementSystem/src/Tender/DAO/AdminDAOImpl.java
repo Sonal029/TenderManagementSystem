@@ -40,6 +40,13 @@ public class AdminDAOImpl implements AdminDAO{
 		} catch (SQLException e) {
 			
 		}
+		finally {
+			try {
+				Utils.closeConnection(conn);
+			}catch(SQLException ex) {
+				
+			}
+		}
 		return vendors;
 	}
 		
@@ -72,6 +79,13 @@ public class AdminDAOImpl implements AdminDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		finally {
+			try {
+				Utils.closeConnection(conn);
+			}catch(SQLException ex) {
+				
+			}
+		}
 		return tendors;
 		
 	}
@@ -155,6 +169,13 @@ public class AdminDAOImpl implements AdminDAO{
 			
 		} catch (ClassNotFoundException | SQLException e) {
 			throw new SomethingWentWrongException("There is something wrong");
+		}
+		finally {
+			try {
+				Utils.closeConnection(conn);
+			}catch(SQLException ex) {
+				
+			}
 		}
 		
 	}

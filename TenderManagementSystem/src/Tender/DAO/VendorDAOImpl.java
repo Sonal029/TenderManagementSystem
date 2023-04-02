@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-
 import Tender.DTO.Bid;
 import Tender.DTO.tendor;
 import Tender.DTO.tendorImpl;
@@ -241,6 +240,48 @@ public class VendorDAOImpl implements VendorDAO
 			try {
 				Utils.closeConnection(conn);
 			}catch(SQLException ex) {
+				
+			}
+		}
+	}
+
+	@Override
+	public void search(String tendor_id) throws SomethingWentWrongException {
+		// TODO Auto-generated method stub
+		Connection conn =null;
+		try {
+				//connect to database
+				conn = Utils.getConnectionTodatabase();
+				//prepare the query
+				String QUERY = "SELECT * FROM tendor where tendor_id=?";
+				
+				//get the prepared statement object
+				PreparedStatement ps = conn.prepareStatement(QUERY);
+				ps.setString(1, tendor_id);
+				//execute query
+				ResultSet resultSet = ps.executeQuery();
+				if(Utils.isResultSetEmpty(resultSet)) {
+					throw new NoRecordFoundException("No tendor found");
+				}
+				while (resultSet.next()) 
+				{
+	                System.out.println("Tendor Id: "+(resultSet.getString(1)+", Tendor Description: "+resultSet.getString(2)+", Budget: "+resultSet.getInt(3)+", Tendor Date: "+ resultSet.getDate(4)+ ", Status: "+resultSet.getString(5)));  
+				}
+				
+		}
+		catch(SQLException | ClassNotFoundException | NoRecordFoundException sqlEx) {
+			//code to log the error in the file
+			throw new SomethingWentWrongException("No data found");
+		}
+		finally 
+		{
+			try 
+			{
+				//close the exception
+			  Utils.closeConnection(conn);				
+			}
+			catch(SQLException sqlEX) 
+			{
 				
 			}
 		}
