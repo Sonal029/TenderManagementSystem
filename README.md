@@ -1,4 +1,4 @@
-# Tender Management System
+Tender Management System
 
 Whenever a company requires a service/merchandise, a tender is floated. The
 company maintains an empaneled list of Vendors. An empaneled vendor can only bid
@@ -7,10 +7,17 @@ there may be bids from several vendors. The company will then select the most su
 bid and places the order with that vendor
 
 There are 2 users in the system:
+
 1. Administrator
 2. Vendor
 
 The Role of the Administrator is:
+To login into the Admin section :
+
+loginId : admin
+
+password: admin
+
 1. Login with his account.
 2. View all the vendors.
 3. Create new tenders.
@@ -25,19 +32,23 @@ The Role of a Vendor is:
 3. View all the current Tenders.
 4. Place a Bid against a Tender.
 5. View his own Bid History with bid status
-6. Search for a tender by tender id or date range
+6. Search for a tender by tender id
 
-Tech Stack
+#Tech Stack:
 -JAVA
-Database
+
+#Database:
 -MySQL
-IDE
+
+#IDE:
 -Spring Tool Suite
 
 Features
 
 # ![image](https://i.ibb.co/zRjq2Gp/Whats-App-Image-2023-03-26-at-9-57-11-AM.jpg)
-
+# ![image](https://i.ibb.co/x1YGfD3/Screenshot-38.png)
 
 Author
 @Shakambhari
+
+https://www.linkedin.com/in/shakambhari-40a788264/
