@@ -1,5 +1,8 @@
 Tender Management System
 
+
+# ![image](https://www.canva.com/design/DAFfB12rkdk/1Id5NsvUfAbFc4CCsNGq2g/edit?utm_content=DAFfB12rkdk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+
 Whenever a company requires a service/merchandise, a tender is floated. The
 company maintains an empaneled list of Vendors. An empaneled vendor can only bid
 for a tender. Every vendor can bid only once against each tender. Against each tender,
@@ -46,6 +49,9 @@ The Role of a Vendor is:
 Features
 
 # ![image](https://i.ibb.co/zRjq2Gp/Whats-App-Image-2023-03-26-at-9-57-11-AM.jpg)
+
+ER Diagram:
+
 # ![image](https://i.ibb.co/x1YGfD3/Screenshot-38.png)
 
 Author
