@@ -1,7 +1,7 @@
 Tender Management System
 
 
-# ![image](https://www.canva.com/design/DAFfB12rkdk/1Id5NsvUfAbFc4CCsNGq2g/edit?utm_content=DAFfB12rkdk&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
+# ![image](https://i.ibb.co/XpmssWv/Innovate.png)
 
 Whenever a company requires a service/merchandise, a tender is floated. The
 company maintains an empaneled list of Vendors. An empaneled vendor can only bid
