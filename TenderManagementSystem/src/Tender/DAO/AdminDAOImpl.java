@@ -7,17 +7,17 @@ import java.sql.SQLException;
 import java.util.List;
 
 import Tender.DTO.Bid;
-import Tender.DTO.tendor;
-import Tender.DTO.vendor;
+import Tender.DTO.Tendor;
+import Tender.DTO.Vendor;
 import Tender.Exception.NoRecordFoundException;
 import Tender.Exception.SomethingWentWrongException;
 
 public class AdminDAOImpl implements AdminDAO{
 
 	@Override
-	public List<vendor> getAllVendors() throws SomethingWentWrongException, NoRecordFoundException {
+	public List<Vendor> getAllVendors() throws SomethingWentWrongException, NoRecordFoundException {
 		Connection conn =null;
-		List<vendor> vendors = null;
+		List<Vendor> vendors = null;
 		try {
 			conn=Utils.getConnectionTodatabase();
 			String query ="Select * from vendor";
@@ -51,9 +51,9 @@ public class AdminDAOImpl implements AdminDAO{
 	}
 		
 	@Override
-	public List<tendor> viewAllTendors() throws SomethingWentWrongException {
+	public List<Tendor> viewAllTendors() throws SomethingWentWrongException {
 		Connection conn =null;
-		List<tendor> tendors = null;
+		List<Tendor> tendors = null;
 		try {
 			conn=Utils.getConnectionTodatabase();
 			String query ="SELECT * FROM tendor where status = 'active'";
@@ -156,7 +156,7 @@ public class AdminDAOImpl implements AdminDAO{
 			
 			PreparedStatement ps3 = conn.prepareStatement(query2);
 			ps3.executeUpdate();
-//			System.out.println("Data Updated");
+			System.out.println("Data Updated");
 			
 			
 			PreparedStatement ps2 = conn.prepareStatement(query1);

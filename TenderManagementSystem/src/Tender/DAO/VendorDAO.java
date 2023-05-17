@@ -3,17 +3,18 @@ package Tender.DAO;
 import java.util.List;
 
 import Tender.DTO.Bid;
-import Tender.DTO.tendor;
-import Tender.DTO.vendor;
+import Tender.DTO.Tendor;
+import Tender.DTO.Vendor;
+import Tender.Exception.NoRecordFoundException;
 import Tender.Exception.SomethingWentWrongException;
 
 public interface VendorDAO 
 {
-   public void vendorRegistration(vendor v); 
+   public void vendorRegistration(Vendor v); 
    
    public boolean vendorAuthentication(String user , String pass);
 
-   public List<tendor> viewAllCurrentTenders() throws SomethingWentWrongException;
+   public List<Tendor> viewAllCurrentTenders() throws SomethingWentWrongException;
    
    public void placeBid(Bid b);
 
@@ -22,5 +23,7 @@ public interface VendorDAO
    public void viewBidStatus(String vendor_id, String tendor_id) throws SomethingWentWrongException;
 
    public void search(String tendor_id) throws SomethingWentWrongException;
+
+   public void vendorUpdate(Vendor v) throws SomethingWentWrongException, NoRecordFoundException;
 
 }

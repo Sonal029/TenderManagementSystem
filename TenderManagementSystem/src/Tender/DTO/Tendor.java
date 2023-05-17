@@ -2,7 +2,7 @@ package Tender.DTO;
 
 import java.time.LocalDate;
 
-public interface tendor 
+public interface Tendor 
 {
 	public String getTendor_id() ;
 	public void setTendor_id(String tendor_id);

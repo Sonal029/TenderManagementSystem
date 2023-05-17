@@ -7,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import Tender.DTO.Bid;
-import Tender.DTO.tendor;
-import Tender.DTO.tendorImpl;
-import Tender.DTO.vendor;
+import Tender.DTO.Tendor;
+import Tender.DTO.TendorImpl;
+import Tender.DTO.Vendor;
 import Tender.Exception.NoRecordFoundException;
 import Tender.Exception.SomethingWentWrongException;
 import Tender.UI.VendorUI;
@@ -17,7 +17,7 @@ import Tender.UI.VendorUI;
 public class VendorDAOImpl implements VendorDAO
 {
 	@Override
-	public void vendorRegistration(vendor v) {
+	public void vendorRegistration(Vendor v) {
 		// TODO Auto-generated method stub
 		Connection conn = null;
 		try
@@ -91,9 +91,9 @@ public class VendorDAOImpl implements VendorDAO
 	}
 
 	@Override
-	public List<tendor> viewAllCurrentTenders() throws SomethingWentWrongException {
+	public List<Tendor> viewAllCurrentTenders() throws SomethingWentWrongException {
 		Connection conn =null;
-		List<tendor> tendors = null;
+		List<Tendor> tendors = null;
 		try {
 				//connect to database
 				conn = Utils.getConnectionTodatabase();
@@ -286,6 +286,47 @@ public class VendorDAOImpl implements VendorDAO
 			}
 		}
 	}
+
+	
+	@Override
+	public void vendorUpdate(Vendor v) throws SomethingWentWrongException, NoRecordFoundException {
+			Connection conn = null;
+			try
+			{
+				conn = Utils.getConnectionTodatabase();
+				 
+				String query = "UPDATE vendor SET name =?, username=?, password=? WHERE vendor_id=? ";
+				
+				 PreparedStatement ps = conn.prepareStatement(query);
+				 
+				ps.setString(1, v.getName());
+				ps.setString(2, v.getUsername());
+				ps.setString(3, v.getPassword());
+				ps.setString(4, v.getId());
+				
+				ps.executeUpdate();
+				System.out.println("Vendor details updated sucessfully");
+			}
+			
+			catch(SQLException | ClassNotFoundException sqlEx) {
+				//code to log the error in the file
+				throw new SomethingWentWrongException("There is something wrong");
+			}
+			finally 
+			{
+				try 
+				{
+					//close the exception
+				  Utils.closeConnection(conn);				
+				}
+				catch(SQLException sqlEX) 
+				{
+					
+				}
+			}
+	}
+
+	
 
 }
     

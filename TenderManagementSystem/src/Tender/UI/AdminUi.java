@@ -10,9 +10,9 @@ import Tender.DAO.AdminDAOImpl;
 import Tender.DAO.TenderDAO;
 import Tender.DAO.TenderDAOImpl;
 import Tender.DTO.Bid;
-import Tender.DTO.tendor;
-import Tender.DTO.tendorImpl;
-import Tender.DTO.vendor;
+import Tender.DTO.Tendor;
+import Tender.DTO.TendorImpl;
+import Tender.DTO.Vendor;
 import Tender.Exception.NoRecordFoundException;
 import Tender.Exception.SomethingWentWrongException;
 
@@ -26,6 +26,7 @@ public class AdminUi {
 		System.out.println("3. View All the Tenders.");
 		System.out.println("4. View All the Bids of a tender.");
 		System.out.println("5. Assign tender to a vendor.");
+		
 		System.out.println("6. Logout");
 		System.out.println("0. Exit");
 		
@@ -35,7 +36,7 @@ public class AdminUi {
              viewAllVendors();
          } else if (adminAction == 2) {
              // Create new tender
-             AdminUi.createNewTender(sc);
+             createNewTender(sc);
          } else if (adminAction == 3) {
              // View all tenders
              viewAllTenders();
@@ -128,7 +129,7 @@ public class AdminUi {
 		AdminDAO adao = new AdminDAOImpl();
 		try
 		{
-			List<tendor> t = adao.viewAllTendors();
+			List<Tendor> t = adao.viewAllTendors();
 		
 		}
 		catch (SomethingWentWrongException e) {
@@ -163,11 +164,10 @@ public class AdminUi {
 		System.out.println("Enter status");
 		String status = sc.next();
 		
-	    tendor t = new tendorImpl(id,tendor_desc,tendor_budget,tender_date,status);
+	    Tendor t = new TendorImpl(id,tendor_desc,tendor_budget,tender_date,status);
 	     
 	    TenderDAO tdao= new TenderDAOImpl();
 	    tdao.createNewTender(t);
-	    System.out.println("Tender created sucessfully");
 	    System.out.println();
 	    System.out.println("=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-");
 	    System.out.println();
@@ -180,7 +180,7 @@ public class AdminUi {
 		
 		AdminDAO adao = new AdminDAOImpl();
 		try {
-			List<vendor> v = adao.getAllVendors();
+			List<Vendor> v = adao.getAllVendors();
 		} catch (SomethingWentWrongException e) {
 			// TODO Auto-generated catch block
 			
