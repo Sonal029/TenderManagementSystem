@@ -4,15 +4,12 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
-import java.util.function.Consumer;
 
 import Tender.DAO.VendorDAO;
 import Tender.DAO.VendorDAOImpl;
 import Tender.DTO.Bid;
-import Tender.DTO.BidImpl;
 import Tender.DTO.Tendor;
 import Tender.DTO.Vendor;
-import Tender.DTO.VendorImpl;
 import Tender.Exception.NoRecordFoundException;
 import Tender.Exception.SomethingWentWrongException;
 
@@ -81,7 +78,7 @@ public class VendorUI
 		System.out.println("Enter password");
 		String password = sc.next();
 		
-	    Vendor v = new VendorImpl(id,name,username,password);
+	    Vendor v = new Vendor(id,name,username,password);
 	     
 	    VendorDAO vdao= new VendorDAOImpl();
 	    vdao.vendorUpdate(v);
@@ -141,7 +138,7 @@ public class VendorUI
 		System.out.println("Enter Bidding date");
 		LocalDate bidDate = LocalDate.parse(sc.next());
 		
-		Bid b = new BidImpl(t_id,v_id,amt,bidDate);
+		Bid b = new Bid(t_id,v_id,amt,bidDate);
 		VendorDAO vdao= new VendorDAOImpl();
 	    vdao.placeBid(b);
 	    System.out.println("Bid placed sucessfully");
@@ -179,7 +176,7 @@ public class VendorUI
 		System.out.println("Enter password");
 		String password = sc.next();
 		
-	    Vendor v = new VendorImpl(id,name,username,password);
+	    Vendor v = new Vendor(id,name,username,password);
 	     
 	    VendorDAO vdao= new VendorDAOImpl();
 	    vdao.vendorRegistration(v);

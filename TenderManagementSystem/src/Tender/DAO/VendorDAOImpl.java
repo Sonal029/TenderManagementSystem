@@ -6,16 +6,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 import Tender.DTO.Bid;
 import Tender.DTO.Tendor;
-import Tender.DTO.TendorImpl;
 import Tender.DTO.Vendor;
 import Tender.Exception.NoRecordFoundException;
 import Tender.Exception.SomethingWentWrongException;
-import Tender.UI.VendorUI;
 
 public class VendorDAOImpl implements VendorDAO
 {
+	
+	
+//	 this method adds new vendor
 	@Override
 	public void vendorRegistration(Vendor v) {
 		// TODO Auto-generated method stub
@@ -47,6 +49,8 @@ public class VendorDAOImpl implements VendorDAO
 		}
 	}
 
+	
+//	this method is used for authenticating the vendor ie login of vendor
 	@Override
 	public boolean vendorAuthentication(String user, String pass) {
 		// TODO Auto-generated method stub
@@ -90,6 +94,7 @@ public class VendorDAOImpl implements VendorDAO
 		return flag;
 	}
 
+//	this method allows vendor to view all tender whose status is active
 	@Override
 	public List<Tendor> viewAllCurrentTenders() throws SomethingWentWrongException {
 		Connection conn =null;
@@ -133,6 +138,8 @@ public class VendorDAOImpl implements VendorDAO
 		return tendors;
 	}
 
+	
+//	this method allows vendor to place bid for  a particular tender
 	@Override
 	public void placeBid(Bid b) {
 		
@@ -166,6 +173,8 @@ public class VendorDAOImpl implements VendorDAO
 				}
 	}
 
+	
+//	this method allows vendor to view all the tender for which he has bided on
 	@Override
 	public void viewBidHistory(String vendor_id) throws SomethingWentWrongException {
 		Connection conn =null;
@@ -206,6 +215,7 @@ public class VendorDAOImpl implements VendorDAO
 
 
 	
+//	this method allows vendor to view the status of the bid
 	@Override
 	public void viewBidStatus(String vendor_id, String tendor_id) throws SomethingWentWrongException {
 		// TODO Auto-generated method stub
@@ -245,6 +255,8 @@ public class VendorDAOImpl implements VendorDAO
 		}
 	}
 
+	
+//	this method allows vendor t search for a  tender with respect to tender id
 	@Override
 	public void search(String tendor_id) throws SomethingWentWrongException {
 		// TODO Auto-generated method stub
@@ -288,6 +300,7 @@ public class VendorDAOImpl implements VendorDAO
 	}
 
 	
+//	this method allows vendor to update his details
 	@Override
 	public void vendorUpdate(Vendor v) throws SomethingWentWrongException, NoRecordFoundException {
 			Connection conn = null;
