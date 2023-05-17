@@ -11,7 +11,6 @@ import Tender.DAO.TenderDAO;
 import Tender.DAO.TenderDAOImpl;
 import Tender.DTO.Bid;
 import Tender.DTO.Tendor;
-import Tender.DTO.TendorImpl;
 import Tender.DTO.Vendor;
 import Tender.Exception.NoRecordFoundException;
 import Tender.Exception.SomethingWentWrongException;
@@ -164,7 +163,7 @@ public class AdminUi {
 		System.out.println("Enter status");
 		String status = sc.next();
 		
-	    Tendor t = new TendorImpl(id,tendor_desc,tendor_budget,tender_date,status);
+	    Tendor t = new Tendor(id,tendor_desc,tendor_budget,tender_date,status);
 	     
 	    TenderDAO tdao= new TenderDAOImpl();
 	    tdao.createNewTender(t);
