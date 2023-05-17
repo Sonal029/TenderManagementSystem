@@ -1,6 +1,6 @@
 package Tender.DTO;
 
-public class vendorImpl implements vendor 
+public class VendorImpl implements Vendor 
 {
 	
 	private String id;
@@ -13,7 +13,7 @@ public class vendorImpl implements vendor
 
 	
 	
-	public vendorImpl(String id, String name, String username, String password) {
+	public VendorImpl(String id, String name, String username, String password) {
 		super();
 		this.id = id;
 		this.name = name;

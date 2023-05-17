@@ -2,14 +2,14 @@ package Tender.DTO;
 
 import java.time.LocalDate;
 
-public class tendorImpl implements tendor{
+public class TendorImpl implements Tendor{
 
 	private String tendor_id;
 	private String tendor_desc;
 	private int tendor_budget;
 	private LocalDate tendor_date;
 	private String status;
-	public tendorImpl(String tendor_id, String tendor_desc, int tendor_budget, LocalDate tendor_date, String status) {
+	public TendorImpl(String tendor_id, String tendor_desc, int tendor_budget, LocalDate tendor_date, String status) {
 		super();
 		this.tendor_id = tendor_id;
 		this.tendor_desc = tendor_desc;

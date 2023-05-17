@@ -10,15 +10,16 @@ import Tender.DAO.VendorDAO;
 import Tender.DAO.VendorDAOImpl;
 import Tender.DTO.Bid;
 import Tender.DTO.BidImpl;
-import Tender.DTO.tendor;
-import Tender.DTO.vendor;
-import Tender.DTO.vendorImpl;
+import Tender.DTO.Tendor;
+import Tender.DTO.Vendor;
+import Tender.DTO.VendorImpl;
+import Tender.Exception.NoRecordFoundException;
 import Tender.Exception.SomethingWentWrongException;
 
 public class VendorUI 
 {
 	static Scanner sc = new Scanner(System.in);
-	public static void displayMenuOfVendor(Scanner sc) throws SomethingWentWrongException
+	public static void displayMenuOfVendor(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException
 	{
 		
 		System.out.println("Vendor actions:");
@@ -27,7 +28,8 @@ public class VendorUI
         System.out.println("3. View the status of a bid");
         System.out.println("4. View bid history");
         System.out.println("5. Search for tender on the basis of Tender id");
-        System.out.println("6. Exit");
+        System.out.println("6. Update vendor's details.");
+        System.out.println("7. Exit");
         int vendorAction = sc.nextInt();
 
         if (vendorAction == 1) {
@@ -51,7 +53,11 @@ public class VendorUI
 //        Search for tender on the basis of Tender id
         	searchTender(sc);
         }
-        else if (vendorAction == 6) {
+        else if(vendorAction == 6)
+        {
+        	update(sc);
+        }
+        else if (vendorAction == 7) {
             // Exit
            System.out.println("Thanks for using our services");
         } 
@@ -64,7 +70,26 @@ public class VendorUI
         }
     }
 
-	private static void searchTender(Scanner sc2) throws SomethingWentWrongException {
+	private static void update(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException {
+		// TODO Auto-generated method stub
+		System.out.println("Enter id");
+		String id = sc.next();
+		System.out.println("Enter name");
+		String name = sc.next();
+		System.out.println("Enter username");
+		String username = sc.next();
+		System.out.println("Enter password");
+		String password = sc.next();
+		
+	    Vendor v = new VendorImpl(id,name,username,password);
+	     
+	    VendorDAO vdao= new VendorDAOImpl();
+	    vdao.vendorUpdate(v);
+	    System.out.println("Your Data is updated sucessfully");
+	    
+	}
+
+	private static void searchTender(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter your tendor id to check your history");
 		String tendor_id=sc.next();
@@ -77,7 +102,7 @@ public class VendorUI
  		displayMenuOfVendor(sc);
 	}
 
-	private static void viewBidStatus() throws SomethingWentWrongException {
+	private static void viewBidStatus() throws SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter your vendor id to check your history");
 		String vendor_id=sc.next();
@@ -92,7 +117,7 @@ public class VendorUI
  		displayMenuOfVendor(sc);
 	}
 
-	public static void viewBidHistory(Scanner sc) throws SomethingWentWrongException {
+	public static void viewBidHistory(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter your vendor id to check your history");
 		String vendor_id=sc.next();
@@ -105,7 +130,7 @@ public class VendorUI
 		displayMenuOfVendor(sc);
 	}
 
-	public static void placeBid() throws SomethingWentWrongException {
+	public static void placeBid() throws SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter tendor id");
 		String t_id = sc.next();
@@ -126,12 +151,12 @@ public class VendorUI
 	    displayMenuOfVendor(sc);
 	}
 
-	public static void viewAllCurrentTenders() throws SomethingWentWrongException {
+	public static void viewAllCurrentTenders() throws SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
 		VendorDAO adao = new VendorDAOImpl();
 		try
 		{
-		  List<tendor> t = adao.viewAllCurrentTenders();
+		  List<Tendor> t = adao.viewAllCurrentTenders();
 		}
 		catch(SomethingWentWrongException ex)
 		{
@@ -143,7 +168,7 @@ public class VendorUI
 	    displayMenuOfVendor(sc);
 	}
 
-	public static void vendorRegistration(Scanner sc) throws SQLException, ClassNotFoundException, SomethingWentWrongException {
+	public static void vendorRegistration(Scanner sc) throws SQLException, ClassNotFoundException, SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter id");
 		String id = sc.next();
@@ -154,7 +179,7 @@ public class VendorUI
 		System.out.println("Enter password");
 		String password = sc.next();
 		
-	    vendor v = new vendorImpl(id,name,username,password);
+	    Vendor v = new VendorImpl(id,name,username,password);
 	     
 	    VendorDAO vdao= new VendorDAOImpl();
 	    vdao.vendorRegistration(v);
@@ -174,7 +199,7 @@ public class VendorUI
 	    
 	}
 
-	public static void vendorAuthentication(Scanner sc) throws SomethingWentWrongException {
+	public static void vendorAuthentication(Scanner sc) throws SomethingWentWrongException, NoRecordFoundException {
 		// TODO Auto-generated method stub
 		System.out.println("Enter Username and password");
 		String user = sc.next();

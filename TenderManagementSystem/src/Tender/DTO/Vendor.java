@@ -1,6 +1,6 @@
 package Tender.DTO;
 
-public interface vendor 
+public interface Vendor 
 {
 
 	public String getId();
